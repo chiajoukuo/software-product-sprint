@@ -22,7 +22,7 @@
         }
     </style>
   </head>
-  <body style="background-color: #E6E6FA;">
+  <body style="background-color: #E6E6FA;" onload="getMessages()">
     <div id="content" style="text-align:center">
       <h1>Chia-Jou's Portfolio</h1>
       <p>This is Chia-Jou's portfolio.</p>
@@ -49,10 +49,16 @@
                 <h4>Pose Imitating Assistant Robot</h4>
             </div>
         </div>
-      
+<!--       
       <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <ul id="messages-container"></ul>
+      <button onclick="getMessages()">Hello</button> -->
+      <div id="messages-container"></div>
+      <form action="/data" method="POST">
+      <p>Enter messages here:</p>
+      <textarea name="text-input">messages</textarea>
+      <br/><br/>
+      <input type="submit" />
+    </form>
     </div>
   </body>
 </html>

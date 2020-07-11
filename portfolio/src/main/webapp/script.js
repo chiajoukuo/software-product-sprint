@@ -15,14 +15,14 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
+function getMessages() {
   const messages = fetch('/data').then(response => response.json()).then((messages) => {
 		console.log(messages);
         const messagesList = document.getElementById('messages-container');
         // messagesList.innerText="test"
         messagesList.innerHTML = '';
         for(var i=0; i<messages.length; i++){
-            messagesList.appendChild(createListElement(': ' + messages[i]));		
+            messagesList.appendChild(createListElement(messages[i]));		
         }
 	})
 	// ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
@@ -35,7 +35,7 @@ function addRandomGreeting() {
 }
 
 function createListElement(text) {
-  const liElement = document.createElement('li');
+  const liElement = document.createElement('p');
   liElement.innerText = text;
   return liElement;
 }
