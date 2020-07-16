@@ -32,7 +32,6 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  // private ArrayList<String> messages = new ArrayList<String>();
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Message").addSort("timestamp", SortDirection.ASCENDING);
@@ -51,13 +50,13 @@ public class DataServlet extends HttpServlet {
 		response.setContentType("application/json;");
     response.getWriter().println(json);
 		
-  }
+  } 
+	
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
 
-    // messages.add(text);
     Entity taskEntity = new Entity("Message");
     taskEntity.setProperty("message", text);
     taskEntity.setProperty("timestamp", timestamp);
