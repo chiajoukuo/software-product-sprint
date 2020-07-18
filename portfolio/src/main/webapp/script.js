@@ -15,23 +15,25 @@
 /**
  * Adds a random greeting to the page.
  */
-function getMessages() {
+function formSettingOnLoad() {
   const messages = fetch('/data').then(response => response.json()).then((messages) => {
-		console.log(messages);
-        const messagesList = document.getElementById('messages-container');
-        // messagesList.innerText="test"
-        messagesList.innerHTML = '';
-        for(var i=0; i<messages.length; i++){
-            messagesList.appendChild(createListElement(messages[i]));		
-        }
+		const messagesList = document.getElementById('messages-container');
+		messagesList.innerHTML = '';
+		for(var i=0; i<messages.length; i++){
+				messagesList.appendChild(createListElement(messages[i]));		
+		}
+		// Set blob url
+		fetch('/blobstore-upload-url')
+			.then((response) => {
+			return response.text();
+			})
+			.then((imageUploadUrl) => {
+			const messageForm = document.getElementById('my-form');
+			messageForm.action = imageUploadUrl;
+			console.log("blobstore upload url", imageUploadUrl);
+			messageForm.classList.remove('hidden');
+			});
 	})
-	// ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // // Add it to the page.
-  // const greetingContainer = document.getElementById('greeting-container');
-  // greetingContainer.innerText = greeting;
-	
-	
 }
 
 function createListElement(text) {
