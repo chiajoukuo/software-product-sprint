@@ -15,14 +15,27 @@
 /**
  * Adds a random greeting to the page.
  */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+function getMessages() {
+  const messages = fetch('/data').then(response => response.json()).then((messages) => {
+		console.log(messages);
+        const messagesList = document.getElementById('messages-container');
+        // messagesList.innerText="test"
+        messagesList.innerHTML = '';
+        for(var i=0; i<messages.length; i++){
+            messagesList.appendChild(createListElement(messages[i]));		
+        }
+	})
+	// ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  // // Add it to the page.
+  // const greetingContainer = document.getElementById('greeting-container');
+  // greetingContainer.innerText = greeting;
+	
+	
+}
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+function createListElement(text) {
+  const liElement = document.createElement('p');
+  liElement.innerText = text;
+  return liElement;
 }
