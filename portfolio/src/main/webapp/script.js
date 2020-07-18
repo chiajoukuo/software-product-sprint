@@ -16,11 +16,14 @@
  * Adds a random greeting to the page.
  */
 function formSettingOnLoad() {
-  const messages = fetch('/data').then(response => response.json()).then((messages) => {
-		const messagesList = document.getElementById('messages-container');
-		messagesList.innerHTML = '';
-		for(var i=0; i<messages.length; i++){
-				messagesList.appendChild(createListElement(messages[i]));		
+  const comments = fetch('/data').then(response => response.json()).then((comments) => {
+		console.log("comments", comments);
+		console.log("message", comments[0].message);
+		console.log("image", comments[0].imageUrl);
+		const commentsList = document.getElementById('comments-container');
+		commentsList.innerHTML = '';
+		for(var i=0; i<comments.length; i++){
+				commentsList.appendChild(createListElement(comments[i].message));		
 		}
 		// Set blob url
 		fetch('/blobstore-upload-url')
@@ -28,10 +31,10 @@ function formSettingOnLoad() {
 			return response.text();
 			})
 			.then((imageUploadUrl) => {
-			const messageForm = document.getElementById('my-form');
-			messageForm.action = imageUploadUrl;
+			const commentForm = document.getElementById('my-form');
+			commentForm.action = imageUploadUrl;
 			console.log("blobstore upload url", imageUploadUrl);
-			messageForm.classList.remove('hidden');
+			commentForm.classList.remove('hidden');
 			});
 	})
 }

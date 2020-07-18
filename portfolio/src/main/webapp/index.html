@@ -6,20 +6,20 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <style>
-        .column {
-            float: left;
-            width: 32%;
-            padding: 0 10px;
-        }
-        .row {
-            margin: 0 -5px;
-            float: center;
-        }
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
+			.column {
+				float: left;
+				width: 32%;
+				padding: 0 10px;
+			}
+			.row {
+				margin: 0 -5px;
+				float: center;
+			}
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
     </style>
   </head>
   <body style="background-color: #E6E6FA;" onload="formSettingOnLoad()">
@@ -34,22 +34,22 @@
       <h2>Projects I've worked on.</h2>
 			<div style="margin-top:20px;" class="row">
 				<div class="column">
-						<img src="/images/pose.png" width="250" style="margin:0px 50px;">
-						<h3>Machine Learning</h3>
-						<h4>Hand-drawn Character Image Generation</h4>
+					<img src="/images/pose.png" width="250" style="margin:0px 50px;">
+					<h3>Machine Learning</h3>
+					<h4>Hand-drawn Character Image Generation</h4>
 				</div>
 				<div class="column">
-						<img src="/images/endo.jpg" width="250" style="margin:0px 50px;">
-						<h3>Robotic</h3>
-						<h4>Endodontic Therapy Robot</h4>
+					<img src="/images/endo.jpg" width="250" style="margin:0px 50px;">
+					<h3>Robotic</h3>
+					<h4>Endodontic Therapy Robot</h4>
 				</div>
 				<div class="column">
-						<img src="/images/pepper.PNG" width="250" style="margin:0px 50px;">
-						<h3>Robotic</h3>
-						<h4>Pose Imitating Assistant Robot</h4>
+					<img src="/images/pepper.PNG" width="250" style="margin:0px 50px;">
+					<h3>Robotic</h3>
+					<h4>Pose Imitating Assistant Robot</h4>
 				</div>
 			</div>
-      <div id="messages-container"></div>
+      <div id="comments-container"></div>
       <form method="POST" id="my-form" class="hidden" enctype="multipart/form-data">
 				<p>Enter messages here:</p>
 				<textarea name="message">messages</textarea>
