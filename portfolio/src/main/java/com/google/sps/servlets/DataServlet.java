@@ -34,44 +34,49 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Message").addSort("timestamp", SortDirection.ASCENDING);
+    // query comments from database
+		Query query = new Query("Comments").addSort("timestamp", SortDirection.ASCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		PreparedQuery results = datastore.prepare(query);
-    List<String> messages = new ArrayList<>();
+		
+		// Put the comments into a list in order to use gson to convert
+    List<Comment> comments = new ArrayList<>();
 		for (Entity entity : results.asIterable()) {
 			long id = entity.getKey().getId();
 			String message = (String) entity.getProperty("message");
-			long timestamp = (long) entity.getProperty("timestamp");
-			messages.add(message);
+			String imageUrl = (String) entity.getProperty("imageUrl");
+			long timestamp = 
+			(long) entity.getProperty("timestamp");
+			comments.add(new Comment(message, imageUrl, timestamp));
 		}
-
+		// convert comment to JSON
     Gson gson = new Gson();
-    String json = gson.toJson(messages);
+    String json = gson.toJson(comments);
 		response.setContentType("application/json;");
     response.getWriter().println(json);
 		
   } 
 	
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String text = getParameter(request, "text-input", "");
-    long timestamp = System.currentTimeMillis();
+  // @Override
+  // public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  //   String text = getParameter(request, "text-input", "");
+  //   long timestamp = System.currentTimeMillis();
 
-    Entity taskEntity = new Entity("Message");
-    taskEntity.setProperty("message", text);
-    taskEntity.setProperty("timestamp", timestamp);
+  //   Entity taskEntity = new Entity("Message");
+  //   taskEntity.setProperty("message", text);
+  //   taskEntity.setProperty("timestamp", timestamp);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(taskEntity);
+  //   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  //   datastore.put(taskEntity);
 
-    response.sendRedirect("/index.html");
-  }
+  //   response.sendRedirect("/index.html");
+  // }
 
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
-    }
-    return value;
-  }
+  // private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+  //   String value = request.getParameter(name);
+  //   if (value == null) {
+  //     return defaultValue;
+  //   }
+  //   return value;
+  // }
 }
