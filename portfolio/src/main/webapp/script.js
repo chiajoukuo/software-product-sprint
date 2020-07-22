@@ -18,12 +18,10 @@
 function formSettingOnLoad() {
   const comments = fetch('/data').then(response => response.json()).then((comments) => {
 		console.log("comments", comments);
-		console.log("message", comments[0].message);
-		console.log("image", comments[0].imageUrl);
 		const commentsList = document.getElementById('comments-container');
 		commentsList.innerHTML = '';
 		for(var i=0; i<comments.length; i++){
-				commentsList.appendChild(createListElement(comments[i].message));		
+				commentsList.appendChild(createListElement(comments[i]));		
 		}
 		// Set blob url
 		fetch('/blobstore-upload-url')
@@ -39,8 +37,19 @@ function formSettingOnLoad() {
 	})
 }
 
-function createListElement(text) {
-  const liElement = document.createElement('p');
-  liElement.innerText = text;
+function createListElement(comment) {
+  var liElement = document.createElement('div');
+	if(comment.message){
+		var messageElement = document.createElement('span');
+		messageElement.innerText=comment.message;
+		liElement.appendChild(messageElement); 
+	}
+  if(comment.imageUrl){
+		var imgElement = document.createElement("IMG");
+		imgElement.setAttribute("src", comment.imageUrl);
+		imgElement.setAttribute("height", "80");
+		imgElement.setAttribute("style", "margin-left:5px");
+		liElement.appendChild(imgElement); 
+	}
   return liElement;
 }
