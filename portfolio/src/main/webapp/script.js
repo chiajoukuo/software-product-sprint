@@ -15,27 +15,41 @@
 /**
  * Adds a random greeting to the page.
  */
-function getMessages() {
-  const messages = fetch('/data').then(response => response.json()).then((messages) => {
-		console.log(messages);
-        const messagesList = document.getElementById('messages-container');
-        // messagesList.innerText="test"
-        messagesList.innerHTML = '';
-        for(var i=0; i<messages.length; i++){
-            messagesList.appendChild(createListElement(messages[i]));		
-        }
+function formSettingOnLoad() {
+  const comments = fetch('/data').then(response => response.json()).then((comments) => {
+		console.log("comments", comments);
+		const commentsList = document.getElementById('comments-container');
+		commentsList.innerHTML = '';
+		for(var i=0; i<comments.length; i++){
+				commentsList.appendChild(createListElement(comments[i]));		
+		}
+		// Set blob url
+		fetch('/blobstore-upload-url')
+			.then((response) => {
+			return response.text();
+			})
+			.then((imageUploadUrl) => {
+			const commentForm = document.getElementById('my-form');
+			commentForm.action = imageUploadUrl;
+			console.log("blobstore upload url", imageUploadUrl);
+			commentForm.classList.remove('hidden');
+			});
 	})
-	// ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // // Add it to the page.
-  // const greetingContainer = document.getElementById('greeting-container');
-  // greetingContainer.innerText = greeting;
-	
-	
 }
 
-function createListElement(text) {
-  const liElement = document.createElement('p');
-  liElement.innerText = text;
+function createListElement(comment) {
+  var liElement = document.createElement('div');
+	if(comment.message){
+		var messageElement = document.createElement('span');
+		messageElement.innerText=comment.message;
+		liElement.appendChild(messageElement); 
+	}
+  if(comment.imageUrl){
+		var imgElement = document.createElement("IMG");
+		imgElement.setAttribute("src", comment.imageUrl);
+		imgElement.setAttribute("height", "80");
+		imgElement.setAttribute("style", "margin-left:5px");
+		liElement.appendChild(imgElement); 
+	}
   return liElement;
 }

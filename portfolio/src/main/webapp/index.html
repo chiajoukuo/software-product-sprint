@@ -6,59 +6,59 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <style>
-        .column {
-            float: left;
-            width: 32%;
-            padding: 0 10px;
-        }
-        .row {
-            margin: 0 -5px;
-            float: center;
-        }
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
+			.column {
+				float: left;
+				width: 32%;
+				padding: 0 10px;
+			}
+			.row {
+				margin: 0 -5px;
+				float: center;
+			}
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
     </style>
   </head>
-  <body style="background-color: #E6E6FA;" onload="getMessages()">
+  <body style="background-color: #E6E6FA;" onload="formSettingOnLoad()">
     <div id="content" style="text-align:center">
       <h1>Chia-Jou's Portfolio</h1>
       <p>This is Chia-Jou's portfolio.</p>
       <img src="/images/Chia-Jou Kuo.jpg" width="280">
       <span style="text-align: center; display:block">
-          <a href="https://www.linkedin.com/in/chia-jou-kuo-b77847175/">Linkedin</a>
-          <a href="https://github.com/chiajoukuo">GitHub</a>
+				<a href="https://www.linkedin.com/in/chia-jou-kuo-b77847175/">Linkedin</a>
+				<a href="https://github.com/chiajoukuo">GitHub</a>
       </span>
       <h2>Projects I've worked on.</h2>
-        <div style="margin-top:20px;" class="row">
-            <div class="column">
-                <img src="/images/pose.png" width="250" style="margin:0px 50px;">
-                <h3>Machine Learning</h3>
-                <h4>Hand-drawn Character Image Generation</h4>
-            </div>
-            <div class="column">
-                <img src="/images/endo.jpg" width="250" style="margin:0px 50px;">
-                <h3>Robotic</h3>
-                <h4>Endodontic Therapy Robot</h4>
-            </div>
-            <div class="column">
-                <img src="/images/pepper.PNG" width="250" style="margin:0px 50px;">
-                <h3>Robotic</h3>
-                <h4>Pose Imitating Assistant Robot</h4>
-            </div>
-        </div>
-<!--       
-      <p>Click here to get a random message:</p>
-      <button onclick="getMessages()">Hello</button> -->
-      <div id="messages-container"></div>
-      <form action="/data" method="POST">
-      <p>Enter messages here:</p>
-      <textarea name="text-input">messages</textarea>
-      <br/><br/>
-      <input type="submit" />
-    </form>
+			<div style="margin-top:20px;" class="row">
+				<div class="column">
+					<img src="/images/pose.png" width="250" style="margin:0px 50px;">
+					<h3>Machine Learning</h3>
+					<h4>Hand-drawn Character Image Generation</h4>
+				</div>
+				<div class="column">
+					<img src="/images/endo.jpg" width="250" style="margin:0px 50px;">
+					<h3>Robotic</h3>
+					<h4>Endodontic Therapy Robot</h4>
+				</div>
+				<div class="column">
+					<img src="/images/pepper.PNG" width="250" style="margin:0px 50px;">
+					<h3>Robotic</h3>
+					<h4>Pose Imitating Assistant Robot</h4>
+				</div>
+			</div>
+      <div id="comments-container"></div>
+      <form method="POST" id="my-form" class="hidden" enctype="multipart/form-data">
+				<p>Enter messages here:</p>
+				<textarea name="message">messages</textarea>
+				<br/><br/>
+				<p>Upload an image:</p>
+				<input type="file" name="image">
+				<br/><br/>
+				<button>Submit</button>
+			</form>
     </div>
   </body>
 </html>
